@@ -1,0 +1,23 @@
+source https://nuget.org/api/v2
+copy_content_to_output_dir: always
+
+nuget FSharp.Core redirects: force
+
+nuget Http.Fs
+nuget FSharp.Data
+nuget FSharpPlus ~> 1.0.0-CI00033
+
+group Build
+  source https://nuget.org/api/v2
+  
+  nuget SourceLink.Fake
+  nuget FAKE
+  nuget FSharp.Formatting
+
+  github fsharp/FAKE modules/Octokit/Octokit.fsx
+
+group Test
+  source https://nuget.org/api/v2
+  
+  nuget NUnit ~> 2
+  nuget NUnit.Runners ~> 2

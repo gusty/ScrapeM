@@ -1,11 +1,10 @@
-﻿#r @"Hopac.0.3.21\lib\net45\Hopac.Core.dll"
-#r @"Hopac.0.3.21\lib\net45\Hopac.dll"
-#r @"Http.fs.4.1.0\lib\net40\HttpFs.dll"
-#r @"FSharp.Data.2.3.2\lib\net40\FSharp.Data.dll"
-#r @"FSharp.Data.2.3.2\lib\net40\FSharp.Data.DesignTime.dll"
+﻿#r @"packages\Hopac\lib\net45\Hopac.Core.dll"
+#r @"packages\Hopac\lib\net45\Hopac.dll"
+#r @"packages\Http.fs\lib\net40\HttpFs.dll"
+#r @"packages\FSharp.Data\lib\net40\FSharp.Data.dll"
 #r @"System.Web.dll"
-#r @"FsControl.2.0.0-CI00104\lib\net40\FsControl.dll"
-#r @"FSharpPlus.1.0.0-CI00032\lib\net40\FSharpPlus.dll"
+#r @"packages\FsControl\lib\net40\FsControl.dll"
+#r @"packages\FSharpPlus\lib\net40\FSharpPlus.dll"
 
 open Hopac
 open HttpFs.Client

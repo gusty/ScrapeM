@@ -1,0 +1,25 @@
+type project
+title
+    ScrapeM
+owners
+    gusty
+authors 
+    gusty
+projectUrl
+    https://github.com/gmpl/ScrapeM/gmpl/ScrapeM
+iconUrl
+    https://raw.githubusercontent.com/gmpl/ScrapeM/master/docs/files/img/logo.png
+licenseUrl
+    https://github.com/gmpl/ScrapeM/gmpl/ScrapeM/blob/master/LICENSE.txt
+requireLicenseAcceptance
+    false
+copyright
+    Copyright 2015
+tags
+    FSharp Scraping Web Monad State Linq MonadTransformer
+summary
+    A monadic web scraping library
+description
+    This is essentially a single-function library which in fact integrates many existing libraries and present several ways to approach web scraping by using different monads
+
+
