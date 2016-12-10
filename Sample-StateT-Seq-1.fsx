@@ -1,6 +1,5 @@
 ﻿#load "ScrapeM.fsx"
-open System
-open System.Text.RegularExpressions
+
 open System.Collections.Generic
 open FSharp.Data
 open FSharpPlus
