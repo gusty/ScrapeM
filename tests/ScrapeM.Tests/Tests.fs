@@ -1,10 +1,17 @@
 module ScrapeM.Tests
 
+open FSharp.Data
+open FSharpPlus
 open ScrapeM
 open NUnit.Framework
 
 [<Test>]
-let ``hello returns 42`` () =
-  let result = Library.hello 42
-  printfn "%i" result
-  Assert.AreEqual(42,result)
+let ``This project has reached at least two milestones`` () =
+    let request a b = (ScrapeM.request a b |> State.eval) Context.Empty
+    let r = 
+        request "https://github.com/gmpl/ScrapeM/milestones?state=closed" None 
+        |> parse 
+        |> cssSelect "a[href*=/milestone/]" 
+        |>> fun x -> x.InnerText()        
+    printfn "%A" r
+    Assert.GreaterOrEqual(length r, 2)

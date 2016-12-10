@@ -1,4 +1,5 @@
 ﻿#load "ScrapeM.fsx"
+#load "src\ScrapeM\ScrapeM.fs"
 
 open System.Collections.Generic
 open FSharp.Data

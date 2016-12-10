@@ -1,4 +1,5 @@
 #load "ScrapeM.fsx"
+#load "src\ScrapeM\ScrapeM.fs"
 
 open System
 open System.Text.RegularExpressions
@@ -17,7 +18,7 @@ let q = linq {
     for lnk in html |> parse |> cssSelect "td>a a[href^='/trading/interest-rates/'] a[href$='html']" |>> (fun x -> x.AttributeValue "href") do
     for row in Cme.Load(@"http://www.cmegroup.com" + lnk).Tables.QuotesFuturesProductTable1.Rows |> skip 1 do
     select {
-        Item  = (Regex("/(([a-zA-Z]|-|[0-9])*).html").Match(lnk).Groups |> toSeq |> skip 1 |> Seq.head).Value
+        Item  = (Regex("/(([a-zA-Z]|-|[0-9])*).html").Match(lnk).Groups |> toSeq |> skip 1 |> head).Value
         Year  = 0
         Month = parse ((row:Row).Month)
         Low   = String.replace "'" "" row.Low
