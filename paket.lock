@@ -1,12 +1,12 @@
 COPY-CONTENT-TO-OUTPUT-DIR: ALWAYS
 NUGET
   remote: https://www.nuget.org/api/v2
-    FsControl (2.0.0-CI00107)
+    FsControl (2.0.0-CI00120)
     FSharp.Core (4.0.0.1) - redirects: force
     FSharp.Data (2.3.2)
       Zlib.Portable (>= 1.11) - framework: >= netstandard11, portable-net45+sl5+win8, portable-net45+win8, portable-net45+win8+wp8+wpa81
-    FSharpPlus (1.0.0-CI00033)
-      FsControl (>= 2.0.0-CI00107)
+    FSharpPlus (1.0.0-CI00037)
+      FsControl (>= 2.0.0-CI00120)
     Hopac (0.3.14)
       FSharp.Core (>= 3.1.2.5)
     Http.fs (4.0.2)
@@ -17,7 +17,7 @@ NUGET
 GROUP Build
 NUGET
   remote: https://www.nuget.org/api/v2
-    FAKE (4.46.1)
+    FAKE (4.47)
     FSharp.Compiler.Service (2.0.0.6)
     FSharp.Formatting (2.14.4)
       FSharp.Compiler.Service (2.0.0.6)
@@ -35,7 +35,7 @@ NUGET
     SourceLink.Fake (1.1)
 GITHUB
   remote: fsharp/FAKE
-    modules/Octokit/Octokit.fsx (ab0bacd2f21ee486879a3ea2a765f15b536181fb)
+    modules/Octokit/Octokit.fsx (954b349a91b815a707941dd0be0dfda124f51da9)
       Octokit (>= 0.20)
 GROUP Test
 NUGET

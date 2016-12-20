@@ -15,6 +15,10 @@ It's possible to create stateful linq-style queries which simulates basic user i
 
 ##Getting started
 
+Important: At the moment this library is in a 'Prototype' stage
+
+Recommended: Visual Studio 2017 to avoid slow compile time of generic code
+
 In order to try the examples run:
 
     > build.cmd // on windows    
@@ -24,5 +28,5 @@ Now you can try the sample files:
 
 
 * [Basic query with state handling](Sample-State-1.fsx) - Extracts a text from a website with login.
-* [Basic query with multiple results](Sample-Seq-1.fsx) - Extracts many texts from a website.
+* [Basic query with multiple results](Sample-Seq-1.fsx) - Extracts many tables from a website, using a type provider.
 * [Advanced query with state handling and multiple results](Sample-StateT-Seq-1.fsx) - Extracts many texts from a website by using different logins.

@@ -5,7 +5,7 @@ nuget FSharp.Core redirects: force
 
 nuget Http.Fs
 nuget FSharp.Data
-nuget FSharpPlus ~> 1.0.0-CI00033
+nuget FSharpPlus ~> 1.0.0-CI00037
 
 group Build
   source https://nuget.org/api/v2

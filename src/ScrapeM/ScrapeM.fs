@@ -21,7 +21,7 @@ let printTable x =
         let maxs = table |> (traverse ZipList >> ZipList.run) |>> map length |>> maxBy id
         let rowSep = String.replicate (sum maxs + length maxs - 1) "-"
         let fill (i, s) = s + String.replicate (i - length s) " "
-        let printRow r = "|" + (r |> Seq.zip maxs |>> fill |> intersperse "|" |> concat) + "|"
+        let printRow r = "|" + (r |> zip maxs |>> fill |> intercalate "|") + "|"
         seq {
             yield "." + rowSep + "."
             yield printRow headers
@@ -30,15 +30,17 @@ let printTable x =
             yield "'" + rowSep + "'" }
     x |> Seq.toList |> lines|> iter (printfn "%s")
 
-let cssSelect s (x:HtmlDocument) = x.CssSelect(s)
+let cssSelect s (x:HtmlDocument) = x.CssSelect s
+let attributes (x:HtmlNode) = x.Attributes() |> List.map (fun x -> x.Name(), x.Value()) |> Map.ofSeq
+let innerText  (x:HtmlNode) = x.InnerText()
 
-/// Function to convert parameter list to Body.
-let bodyFunc (acc:string) (tArg:KeyValuePair<string,string>) =     
+
+let private paramsToBody (acc:string) (tArg:KeyValuePair<string,string>) =     
     let rName, rValue  = (tArg.Key, tArg.Value) |> join bimap HttpUtility.UrlEncode // Encode characters like spaces before transmitting.
     let mix = HttpUtility.UrlEncode rName + "=" + rValue
     match acc with
     | "" -> mix // Skip first.
-    | _ -> acc + "&" + mix  // application/x-www-form-urlencoded
+    | _  -> acc + "&" + mix  // application/x-www-form-urlencoded
 
 
 type Context = {Url : string option; Html : string option; Cookies : Map<string, string>} with
@@ -47,7 +49,10 @@ type Context = {Url : string option; Html : string option; Cookies : Map<string,
 let request (url:string) postData =
     let rec loop rqUrl postData = State (fun (state:Context) ->
         let url = (if rqUrl = "" then state.Url.Value else rqUrl)
+        #if RELEASE
+        #else
         printfn "Request: %A  cookies: %A" url state.Cookies
+        #endif
 
         let request = 
             Request.createUrl (match postData with None -> Get | _ -> Post) url // todo get it from the form
@@ -69,7 +74,7 @@ let request (url:string) postData =
                                     |>> (fun x -> KeyValuePair((x.Attribute "name").Value(), (x.Attribute "value").Value()))
                                     <|> ([".x"; ".y"] |>> fun a -> KeyValuePair((img_inputs.[0].Attribute "name").Value() + a, "1"))
                     
-                    Request.bodyString (fold bodyFunc "" (currentValues ++ values)) >> Request.setHeader (ContentType (ContentType.parse "application/x-www-form-urlencoded").Value)
+                    Request.bodyString (fold paramsToBody "" (currentValues ++ values)) >> Request.setHeader (ContentType (ContentType.parse "application/x-www-form-urlencoded").Value)
         
         let requestWithCookiesOfPrevResponse = Map.fold (fun rq k v -> Request.cookie (Cookie.create (k, v)) rq) request state.Cookies
         let response = requestWithCookiesOfPrevResponse |> getResponse |> Alt.toAsync |> Async.RunSynchronously
@@ -79,7 +84,10 @@ let request (url:string) postData =
         if response.statusCode = 302 then
             let redir = (html |> parse |> cssSelect "a").Head.Attributes().Head.Value()
             let redirUrl = (if redir = "/" then url else redir)
+            #if RELEASE
+            #else
             printfn "Redirect to: %A" redirUrl
+            #endif
             State.run (loop redirUrl None) {Url = Some url; Html = state.Html; Cookies = state.Cookies ++ ofSeq response.cookies}
         else
             html, {Url = Some url; Html = Some html; Cookies = state.Cookies ++ ofSeq response.cookies})
