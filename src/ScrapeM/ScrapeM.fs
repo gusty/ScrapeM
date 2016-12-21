@@ -80,7 +80,8 @@ let request (url:string) postData =
         let response = requestWithCookiesOfPrevResponse |> getResponse |> Alt.toAsync |> Async.RunSynchronously
         
         let html = (new StreamReader(response.body)).ReadToEnd()
-       
+        let state = {Url = Some url; Html = Some html; Cookies = (state.Cookies, ofSeq response.cookies) ||> Map.fold (fun s k t -> Map.add k t s) }
+
         if response.statusCode = 302 then
             let redir = (html |> parse |> cssSelect "a").Head.Attributes().Head.Value()
             let redirUrl = (if redir = "/" then url else redir)
@@ -88,9 +89,8 @@ let request (url:string) postData =
             #else
             printfn "Redirect to: %A" redirUrl
             #endif
-            State.run (loop redirUrl None) {Url = Some url; Html = state.Html; Cookies = state.Cookies ++ ofSeq response.cookies}
-        else
-            html, {Url = Some url; Html = Some html; Cookies = state.Cookies ++ ofSeq response.cookies})
+            State.run (loop redirUrl None) state
+        else html, state)
     loop url postData
 
 let inline hoistState x = (StateT << (fun a -> result << a) << State.run) x
