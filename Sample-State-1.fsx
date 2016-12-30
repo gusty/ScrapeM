@@ -4,6 +4,7 @@
 open System.Collections.Generic
 open FSharp.Data
 open FSharpPlus
+open FSharpPlus.Data
 open ScrapeM
 
 // Simple Stateful query with a single result

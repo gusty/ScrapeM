@@ -2,6 +2,7 @@ module ScrapeM.Tests
 
 open FSharp.Data
 open FSharpPlus
+open FSharpPlus.Data
 open ScrapeM
 open NUnit.Framework
 

@@ -5,6 +5,7 @@ open System
 open System.Text.RegularExpressions
 open FSharp.Data
 open FSharpPlus
+open FSharpPlus.Data
 open FSharpPlus.Operators.ApplicativeMath
 open ScrapeM
 

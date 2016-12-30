@@ -10,6 +10,7 @@ open System.Web
 
 open FSharp.Data
 open FSharpPlus
+open FSharpPlus.Data
 
 let printTable x =
     let lines (lst: 'Record seq) = 

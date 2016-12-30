@@ -5,5 +5,4 @@
 #r @"packages\Http.fs\lib\net40\HttpFs.dll"
 #r @"packages\FSharp.Data\lib\net40\FSharp.Data.dll"
 #r @"System.Web.dll"
-#r @"packages\FsControl\lib\net40\FsControl.dll"
 #r @"packages\FSharpPlus\lib\net40\FSharpPlus.dll"
