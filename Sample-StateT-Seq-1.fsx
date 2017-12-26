@@ -2,7 +2,6 @@
 #load "src\ScrapeM\ScrapeM.fs"
 
 open System.Collections.Generic
-open FSharp.Data
 open FSharpPlus
 open FSharpPlus.Data
 open FSharpPlus.Operators.Arrows
@@ -15,8 +14,8 @@ type News = {User : string; Title : string; IntroText : string}
 let q = monad.plus.strict {
     for credential in [("stopthebug", "stopthebug1"); ("aslzzztk", "abcd1234")] do
     for data       in [[KeyValuePair ("username", fst credential); KeyValuePair ("password", snd credential)]] do
-    let!  _  = request "https://secure.moddb.com/members/login" None                        
-    let!  _  = request "" (Some data)                                                       
+    let!  _  = request "https://secure.moddb.com/members/login" None
+    let!  _  = request "" (Some data)
     let! htm = request ("http://www.moddb.com/members/" + fst credential + "/comments") None
     for lnk in htm |> parse |> cssSelect "a[class='related'] a[href^='/news']" |>> (attributes >> item "href" &&& innerText) |> distinct do
     let! doc = (request ("http://www.moddb.com" + fst lnk) None) |>> parse

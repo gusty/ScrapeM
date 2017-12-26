@@ -17,9 +17,8 @@ type InterestRate<'a, 'b, 'c, 'd, 'e> = {Item : 'a; Year : 'b; Month: 'c; Low : 
 
 let q = monad.plus {
     let! html = request "http://www.cmegroup.com" None
-    for lnk in
-        html |> parse |> cssSelect "td>a a[href^='/trading/interest-rates/'] a[href$='html']" |>> attributes |>> item "href"
-        |> filter (fun x -> not (String.isSubString "Specs" x)) do
+    for lnk in html |> parse |> cssSelect "td>a a[href^='/trading/interest-rates/'] a[href$='html']" |>> attributes |>> item "href" do
+    where (not (String.isSubString "Specs" lnk))
     for row in Cme.Load(@"http://www.cmegroup.com" + lnk).Tables.QuotesFuturesProductTable1.Rows |> skip 1 do    
     select {
         Item  = (Regex("/(([a-zA-Z]|-|[0-9])*).html").Match(lnk).Groups |> toSeq |> skip 1 |> head).Value
