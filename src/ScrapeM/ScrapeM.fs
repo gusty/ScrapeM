@@ -45,7 +45,7 @@ let private paramsToBody (acc:string) (tArg:KeyValuePair<string,string>) =
 
 
 type Context = {Url : string option; Html : string option; Cookies : Map<string, string>} with
-    static member Empty = {Url = None; Html = None; Cookies = getEmpty()}
+    static member Empty = {Url = None; Html = None; Cookies = zero}
 
 let request (url:string) postData =
     let rec loop rqUrl postData = State (fun (state:Context) ->

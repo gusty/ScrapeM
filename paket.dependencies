@@ -4,8 +4,8 @@ copy_content_to_output_dir: always
 nuget FSharp.Core redirects: force
 
 nuget Http.Fs
-nuget FSharp.Data
-nuget FSharpPlus ~> 1.0.0-CI00063
+nuget FSharp.Data ~> 2.3.2
+nuget FSharpPlus ~> 1.0.0-CI00092
 
 group Build
   source https://nuget.org/api/v2

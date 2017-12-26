@@ -11,7 +11,7 @@ open ScrapeM
 
 type News = {User : string; Title : string; IntroText : string}
 
-let q = linq {
+let q = monad.plus {
     let! credential = result ("stopthebug", "stopthebug1")
     let!  _  = request "https://secure.moddb.com/members/login" None                        
     let!  _  = request "" (Some [KeyValuePair ("username", fst credential); KeyValuePair ("password", snd credential)])
