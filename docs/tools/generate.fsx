@@ -13,7 +13,7 @@ let referenceBinaries = []
 // Web site location for the generated documentation
 let website = "/ScrapeM"
 
-let githubLink = "https://github.com/gmpl/ScrapeM/gmpl/ScrapeM"
+let githubLink = "https://github.com/gusty/ScrapeM/gusty/ScrapeM"
 
 // Specify more information about your project
 let info =

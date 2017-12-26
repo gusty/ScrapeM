@@ -7,7 +7,7 @@ This library makes [web scraping](https://en.wikipedia.org/wiki/Web_scraping) ea
 
 This is essentially a single-function library which integrates many existing libraries and present several ways to approach web scraping by using different monads.
 
-All other common functions used here come from different libraries like [FSharp.Data](http://fsharp.github.io/FSharp.Data/), [Http.fs](https://github.com/haf/Http.fs) and [F#+](https://github.com/gmpl/FSharpPlus)
+All other common functions used here come from different libraries like [FSharp.Data](http://fsharp.github.io/FSharp.Data/), [Http.fs](https://github.com/haf/Http.fs) and [F#+](https://github.com/gusty/FSharpPlus)
 
 *Scrapes the web with category*
 

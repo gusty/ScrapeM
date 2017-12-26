@@ -6,11 +6,11 @@ owners
 authors 
     gusty
 projectUrl
-    https://github.com/gmpl/ScrapeM/gmpl/ScrapeM
+    https://github.com/gusty/ScrapeM/gusty/ScrapeM
 iconUrl
-    https://raw.githubusercontent.com/gmpl/ScrapeM/master/docs/files/img/logo.png
+    https://raw.githubusercontent.com/gusty/ScrapeM/master/docs/files/img/logo.png
 licenseUrl
-    https://github.com/gmpl/ScrapeM/gmpl/ScrapeM/blob/master/LICENSE.txt
+    https://github.com/gusty/ScrapeM/gusty/ScrapeM/blob/master/LICENSE.txt
 requireLicenseAcceptance
     false
 copyright
