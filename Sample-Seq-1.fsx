@@ -16,9 +16,11 @@ type Row = Cme.QuotesFuturesProductTable1.Row
 type InterestRate<'a, 'b, 'c, 'd, 'e> = {Item : 'a; Year : 'b; Month: 'c; Low : 'd; High : 'd; Mid : 'e}
 
 let q = linq {
-    let! html = request "http://www.cmegroup.com" None 
-    for lnk in html |> parse |> cssSelect "td>a a[href^='/trading/interest-rates/'] a[href$='html']" |>> attributes |>> item "href" do
-    for row in Cme.Load(@"http://www.cmegroup.com" + lnk).Tables.QuotesFuturesProductTable1.Rows |> skip 1 do
+    let! html = request "http://www.cmegroup.com" None
+    for lnk in
+        html |> parse |> cssSelect "td>a a[href^='/trading/interest-rates/'] a[href$='html']" |>> attributes |>> item "href"
+        |> filter (fun x -> not (String.contains "Specs" x)) do
+    for row in Cme.Load(@"http://www.cmegroup.com" + lnk).Tables.QuotesFuturesProductTable1.Rows |> skip 1 do    
     select {
         Item  = (Regex("/(([a-zA-Z]|-|[0-9])*).html").Match(lnk).Groups |> toSeq |> skip 1 |> head).Value
         Year  = 0
