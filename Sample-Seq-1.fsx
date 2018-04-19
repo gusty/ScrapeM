@@ -6,7 +6,7 @@ open System.Text.RegularExpressions
 open FSharp.Data
 open FSharpPlus
 open FSharpPlus.Data
-open FSharpPlus.Operators.ApplicativeMath
+open FSharpPlus.Math.Applicative
 open ScrapeM
 
 let request a b: seq<_> = (ScrapeM.request a b |> State.eval) Context.Empty |> result // Use (non-stateful) sequences
@@ -34,7 +34,7 @@ let q = monad.plus {
         Month = (row.Month:DateTime).Month        
         Low   = (tryParse row.Low  : float option)
         High  = (tryParse row.High : float option)
-        Mid   = ((tryParse row.Low |+| tryParse row.High) |/2. : float option)}
+        Mid   = ((tryParse row.Low .+. tryParse row.High) ./2.0 : float option)}
     }
 
 let table = q |> toList

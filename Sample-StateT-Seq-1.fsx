@@ -7,11 +7,11 @@ open FSharpPlus.Data
 open FSharpPlus.Operators.Arrows
 open ScrapeM
 
-let request a b: StateT<_,_ seq> = hoistState (ScrapeM.request a b) // Use stateful sequences
+let request a b: StateT<_,_ seq> = StateT.hoist (ScrapeM.request a b) // Use stateful sequences
 
 type News = {User : string; Title : string; IntroText : string}
 
-let q = monad.plus.strict {
+let q = monad.plus {
     for credential in [("stopthebug", "stopthebug1"); ("aslzzztk", "abcd1234")] do
     for data       in [[KeyValuePair ("username", fst credential); KeyValuePair ("password", snd credential)]] do
     let!  _  = request "https://secure.moddb.com/members/login" None

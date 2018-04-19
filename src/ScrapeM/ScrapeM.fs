@@ -93,5 +93,3 @@ let request (url:string) postData =
             State.run (loop redirUrl None) state
         else html, state)
     loop url postData
-
-let inline hoistState x = (StateT << (fun a -> result << a) << State.run) x
