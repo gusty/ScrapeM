@@ -1,4 +1,4 @@
-#load "ScrapeM.fsx"
+#load "ScrapeM-refs.fsx"
 #load "src\ScrapeM\ScrapeM.fs"
 
 open System
