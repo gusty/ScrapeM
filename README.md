@@ -13,7 +13,7 @@ All other common functions used here come from different libraries like [FSharp.
 
 It's possible to create stateful linq-style queries which simulates basic user interaction with form submission by using different flavours of State monads. Also sequences expressions are available to integrate the data being extracted from multiple webpages in the same query.
 
-##Getting started
+## Getting started
 
 Important: At the moment this library is in a 'Prototype' stage
 
